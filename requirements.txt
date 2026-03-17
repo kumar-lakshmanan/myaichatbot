@@ -1,0 +1,2 @@
+# MyAIChatBot Requirements
+ollama>=0.1.0

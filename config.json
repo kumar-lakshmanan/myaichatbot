@@ -1,0 +1,55 @@
+{
+	"general" : {
+					"timeStampFormat" : "%Y%m%d%H%M%S",
+					"dateTimeFormat" : "%Y-%m-%d %I:%M:%S %p",
+					"hostname": "MUKUND_PC",
+					
+					"verbose" : 0,
+					
+					"mainModel": "qwen3-coder:480b-cloud",
+					"websearchModel": "gpt-oss:20b-cloud",					
+					"repeatCoreCallingCountLimit" : 10,
+					
+					"ai_definition" : "ai_definition_for_coding",
+					"ai_definition_sample1" : "ai_definition_for_general",
+					"ai_definition_sample2" : "ai_definition_for_coding",
+
+					"simulate" : 0,
+           										
+					"include_reference_files" : 1,
+					"include_past_conversation" : 0,
+					"save_conversation" : 1,					 
+										    
+					"reference_files_paths" : ["G:/pyworkspace/myaichatbot"],
+					"reference_files_includeonly" : [],
+					"reference_files_exclude" : [
+													".pyc",
+													".log",
+													".__init__.py",
+													".prefs",
+													".project",
+													".pydevproject"
+											    ],
+												
+					"save_prompt" : 1,
+					"prompt_file" : "prompt.txt",												
+					
+					"conversation_file_path" : "./conversation/coding"												        
+				},
+	"logging" : {
+					"logDisable" : 0,
+					"logLevel" : "INFO",
+					"logDateTimeFormat2" : "%Y-%m-%d %I:%M:%S%p",
+					"logDateTimeFormat" : "%I:%M:%S%p",
+					"logFormat": "[%(asctime)s]%(levelname).1s:%(message)s",
+					"logToConsole" : 1,
+					"logToFile" : 1,
+					"logFile" : "output.log",
+					"logModuleName" : 0,
+					"logProdMode" : 0
+				},
+	"folders" : {
+					"temp" : "C:/TEMP" ,
+					"cache" : "C:/TEMP/ktools/cache"
+				}
+}
