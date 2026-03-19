@@ -9,6 +9,14 @@ An intelligent AI chatbot framework built with Python that integrates with Ollam
 ## Quick Start
 
 ```bash
+# Download/Install ollama
+https://ollama.com/download
+
+# Download/Pull ai models for ollama
+https://docs.ollama.com/cli
+
+ollama pull qwen3-coder:480b-cloud
+
 # Install dependencies
 pip install -r requirements.txt
 

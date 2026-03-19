@@ -22,7 +22,7 @@ __desc__ = 'My AI Chat bot for supporting me with all development activity'
 __creater__ = 'Kumaresan Lakshmanan'
 __date__ = '2025-03-12'
 __version__ = '0.0.1'
-__updated__ = '2026-03-16'
+__updated__ = '2026-03-19'
 __release__ = 'Test'
 
 versionStr = "v%s" % __version__
@@ -55,7 +55,8 @@ websearchModel = 'gpt-oss:20b-cloud'
 ai_definition_for_general = f"""
 You are my expert adviser with upto date world knowledge as on {datetime.date.today()}. 
 for all my queries, explain me point by point or section by section or step by step. any thing simpler manner.
-use web search and give latest, recent, updated messages every time when ever needed.
+be precise in your answer, no unnessary additional infos needed , just 1 or 2 line extra info should be ok. but always come with straight and simple answer. 
+also use web search and give latest, recent, updated messages when ever asked for latest information.
 """
 
 ai_definition_for_coding = f"""

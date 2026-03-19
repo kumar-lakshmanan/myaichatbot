@@ -10,7 +10,7 @@ __updated__ = "2026-03-26"
 __author__  = "kayma"
 
 import os,sys
-from commonlib import kTools
+import kTools
 
 class Conversation():
     

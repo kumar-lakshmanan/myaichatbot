@@ -12,7 +12,7 @@ import os
 from ollama import chat, web_fetch, web_search
 import datetime
 
-from commonlib import kTools
+import kTools
 
 def webSearch(qry: str) -> str:
     '''

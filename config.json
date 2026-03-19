@@ -10,7 +10,7 @@
 					"websearchModel": "gpt-oss:20b-cloud",					
 					"repeatCoreCallingCountLimit" : 10,
 					
-					"ai_definition" : "ai_definition_for_coding",
+					"ai_definition" : "ai_definition_for_general",
 					"ai_definition_sample1" : "ai_definition_for_general",
 					"ai_definition_sample2" : "ai_definition_for_coding",
 
@@ -28,7 +28,9 @@
 													".__init__.py",
 													".prefs",
 													".project",
-													".pydevproject"
+													".pydevproject",
+													"conversation",
+													".git"
 											    ],
 												
 					"save_prompt" : 1,
@@ -43,7 +45,7 @@
 					"logDateTimeFormat" : "%I:%M:%S%p",
 					"logFormat": "[%(asctime)s]%(levelname).1s:%(message)s",
 					"logToConsole" : 1,
-					"logToFile" : 1,
+					"logToFile" : 0,
 					"logFile" : "output.log",
 					"logModuleName" : 0,
 					"logProdMode" : 0

@@ -1,9 +1,13 @@
 import os, sys
-import ollama
+K_PYLIB = 'G:/pyworkspace/kpylib'
+if not ('K_PYLIB' in os.environ and os.path.exists(os.environ['K_PYLIB'])): os.environ['K_PYLIB'] = K_PYLIB
+if not ('K_PYLIB' in os.environ and os.path.exists(os.environ['K_PYLIB'])): sys.exit("K_PYLIB not found!")
+for eachDependency in os.environ['K_PYLIB'].split(';'): sys.path.append(eachDependency.strip())
 
-from commonlib import kTools
+import ollama
 import lookup
 
+import kTools 
 from lib import message
 from lib import utils
 from lib import tools
@@ -29,7 +33,8 @@ class MyAIChatBot():
         self.include_past_conversation = tls.getValue('include_past_conversation')
         self.include_reference_files = tls.getValue('include_reference_files')
         
-        self.ai_definition = tls.getValue('ai_definition', tls.getValue('ai_definition_for_general'))
+        self.ai_definition = tls.getValue('ai_definition')
+        self.ai_definition = tls.getValue(self.ai_definition, tls.getValue('ai_definition_for_general'))
         
         self.conversation_file_path = tls.getValue('conversation_file_path')
         self.reference_files_paths = tls.getValue('reference_files_paths')
@@ -195,8 +200,7 @@ if __name__ == "__main__":
     mcb = MyAIChatBot()
     mcb.initialize()
     qry = '''
-        I have commonlib.kTools. a simple lib for supporting any python development.
-        Read that file and Create a readme.md in commonlib. Listing down all features of kTools. 
+        whats the latest python version?
     '''
     mcb.chat(qry)
     tls.info(f"You: {qry}")
