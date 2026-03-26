@@ -1,0 +1,2 @@
+[console_scripts]
+myaichatbot = myaichatbot.main:main
