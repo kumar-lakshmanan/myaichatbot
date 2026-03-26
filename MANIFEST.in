@@ -1,0 +1,5 @@
+include README.md
+include requirements.txt
+include config.json
+include prompt.txt
+recursive-include myaichatbot *.json *.txt

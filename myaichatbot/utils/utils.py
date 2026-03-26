@@ -137,7 +137,7 @@ class Utilities():
         # If response mentions specific next steps
         continuation_phrases = [
             "next step", "next i will", "next we", "continuing with",
-            "now i will", "now we", "proceed to", "move on to"
+            "now i will", "now we", "proceed to", "move on to", "let me"
         ]
         
         return not any(phrase in responseMessage.lower() for phrase in continuation_phrases)    

@@ -1,17 +1,18 @@
-import os, sys
-K_PYLIB = 'G:/pyworkspace/kpylib'
-if not ('K_PYLIB' in os.environ and os.path.exists(os.environ['K_PYLIB'])): os.environ['K_PYLIB'] = K_PYLIB
-if not ('K_PYLIB' in os.environ and os.path.exists(os.environ['K_PYLIB'])): sys.exit("K_PYLIB not found!")
-for eachDependency in os.environ['K_PYLIB'].split(';'): sys.path.append(eachDependency.strip())
+import os
+import sys
+
+# Add the parent directory to the path so we can import kTools
+parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+kpylib_path = os.path.join(parent_dir, '..', 'kpylib')
+if os.path.exists(kpylib_path):
+    sys.path.append(kpylib_path)
 
 import ollama
-import lookup
-
-import kTools 
-from lib import message
-from lib import utils
-from lib import tools
-from lib import conversation
+from . import lookup
+from .core import message, conversation
+from .tools import tools
+from .utils import utils
+import kTools
 
 APP_NAME = "MyAIChatBot"
 CONFIG_FILE = "config.json"
@@ -23,23 +24,23 @@ class MyAIChatBot():
         self.tls = kTools.KTools(APP_NAME, LOOKUP_FILE, CONFIG_FILE)
         self.utils = utils.Utilities()
         
-        self.verbose = tls.getValue('verbose')
-        self.repeatCoreCallingCountLimit = tls.getValue('repeatCoreCallingCountLimit')
+        self.verbose = self.tls.getValue('verbose')
+        self.repeatCoreCallingCountLimit = self.tls.getValue('repeatCoreCallingCountLimit')
         
-        self.simulate = tls.getValue('simulate')
-        self.save_prompt = tls.getValue('save_prompt')
-        self.prompt_file = tls.getValue('prompt_file')            
-        self.save_conversation = tls.getValue('save_conversation')
-        self.include_past_conversation = tls.getValue('include_past_conversation')
-        self.include_reference_files = tls.getValue('include_reference_files')
+        self.simulate = self.tls.getValue('simulate')
+        self.save_prompt = self.tls.getValue('save_prompt')
+        self.prompt_file = self.tls.getValue('prompt_file')            
+        self.save_conversation = self.tls.getValue('save_conversation')
+        self.include_past_conversation = self.tls.getValue('include_past_conversation')
+        self.include_reference_files = self.tls.getValue('include_reference_files')
         
-        self.ai_definition = tls.getValue('ai_definition')
-        self.ai_definition = tls.getValue(self.ai_definition, tls.getValue('ai_definition_for_general'))
+        self.ai_definition = self.tls.getValue('ai_definition')
+        self.ai_definition = self.tls.getValue(self.ai_definition, self.tls.getValue('ai_definition_for_general'))
         
-        self.conversation_file_path = tls.getValue('conversation_file_path')
-        self.reference_files_paths = tls.getValue('reference_files_paths')
-        self.reference_files_includeonly = tls.getValue('reference_files_includeonly')
-        self.reference_files_exclude = tls.getValue('reference_files_exclude')      
+        self.conversation_file_path = self.tls.getValue('conversation_file_path')
+        self.reference_files_paths = self.tls.getValue('reference_files_paths')
+        self.reference_files_includeonly = self.tls.getValue('reference_files_includeonly')
+        self.reference_files_exclude = self.tls.getValue('reference_files_exclude')      
         
     def initialize(self):
         self.tls.info("Initializing...")
@@ -182,7 +183,7 @@ class MyAIChatBot():
                     
                     if (not self.utils.is_agent_actually_done(respMsg)) and (self._repeatCoreCallCurrCount < self.repeatCoreCallingCountLimit):
                         self._repeatCoreCallCurrCount += 1 
-                        msg = "Have you completed all requested tasks? If yes, please explicitly state 'All tasks completed.' If not, continue with remaining tasks."
+                        msg = "Have you completed all requested tasks? If yes, please explicitly state 'All task completed.' If not, continue with remaining tasks."
                         self.msg.addUserMessage(msg)
                         self._coreChat()
                     else:
@@ -195,14 +196,20 @@ class MyAIChatBot():
         else:
             self.tls.info("Simulation Done!")          
 
-if __name__ == "__main__":
+def main():
+    """Main entry point for the MyAIChatBot application."""
     tls = kTools.KTools(APP_NAME, LOOKUP_FILE, CONFIG_FILE)
     mcb = MyAIChatBot()
     mcb.initialize()
     qry = '''
-        whats the latest python version?
+        how do i run package build process for my projects (eg: G:\pyworkspace\kpylib and G:\pyworkspace\myaichatbot)?
+        how do i increase version numbers for the packages?
+        how i include kpylib package in my main project myaichatbot?        
     '''
     mcb.chat(qry)
     tls.info(f"You: {qry}")
     tls.info(f"AI: {mcb.get_response()}")
     tls.info("Done")
+
+if __name__ == "__main__":
+    main()

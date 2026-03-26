@@ -3,7 +3,6 @@
 	<name>myaichatbot</name>
 	<comment></comment>
 	<projects>
-		<project>kpylib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

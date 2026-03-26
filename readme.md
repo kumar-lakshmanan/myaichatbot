@@ -17,19 +17,19 @@ https://docs.ollama.com/cli
 
 ollama pull qwen3-coder:480b-cloud
 
-# Install dependencies
-pip install -r requirements.txt
+# Install the package
+pip install myaichatbot
 
 # Set environment variables
 export OLLAMA_API_KEY="your-api-key-here"
 
 # Run the application
-python main.py
+myaichatbot
 ```
 
 ```python
 # Basic usage example
-from main import MyAIChatBot
+from myaichatbot.main import MyAIChatBot
 
 mcb = MyAIChatBot()
 mcb.initialize()
@@ -65,36 +65,53 @@ The framework provides:
 - Ollama (with required models installed)
 - Required Python packages
 
-### Setup Steps
+### Installation Options
 
-1. Clone the repository:
+#### Option 1: Install from PyPI
+```bash
+pip install myaichatbot
+```
+
+#### Option 2: Install from source
 ```bash
 git clone https://github.com/kayma/myaichatbot.git
 cd myaichatbot
+pip install .
 ```
 
-2. Install dependencies:
+#### Option 3: Install in development mode
 ```bash
-pip install -r requirements.txt
+git clone https://github.com/kayma/myaichatbot.git
+cd myaichatbot
+pip install -e .
 ```
 
-3. Set up environment variables:
-```bash
-export OLLAMA_API_KEY="your-api-key-here"
-```
+### Setup Steps
 
-4. Install required Ollama models:
+1. Install required Ollama models:
 ```bash
 ollama pull qwen3-coder:480b-cloud
 ollama pull gpt-oss:20b-cloud
 ```
 
+2. Set up environment variables:
+```bash
+export OLLAMA_API_KEY="your-api-key-here"
+```
+
 ## Usage Examples
 
-### Basic Conversation
+### Command Line Usage
+
+```bash
+# Run the application
+myaichatbot
+```
+
+### Programmatic Usage
 
 ```python
-from main import MyAIChatBot
+from myaichatbot.main import MyAIChatBot
 
 mcb = MyAIChatBot()
 mcb.initialize()
@@ -105,6 +122,8 @@ print(mcb.get_response())
 ### Project Analysis
 
 ```python
+from myaichatbot.main import MyAIChatBot
+
 mcb = MyAIChatBot()
 mcb.include_reference_files = 1
 mcb.reference_files_paths = ["/path/to/your/project"]
@@ -117,6 +136,8 @@ print(mcb.get_response())
 ### Code Assistance with Tools
 
 ```python
+from myaichatbot.main import MyAIChatBot
+
 mcb = MyAIChatBot()
 mcb.initialize()
 # The AI can automatically use tools like file operations and web search
@@ -181,38 +202,51 @@ mcb.verbose = 1
 
 ```
 myaichatbot/
-├── commonlib/                 # Shared utilities and KTools framework
+├── myaichatbot/              # Main package
 │   ├── __init__.py
-│   └── kTools.py             # Core utility library (singleton pattern)
-├── lib/                       # Main application libraries
-│   ├── __init__.py
-│   ├── conversation.py       # Conversation history management
-│   ├── message.py            # Message handling system
-│   ├── tools.py              # Tool management system
-│   ├── utils.py              # Utility functions
-│   └── custom_tools/         # Custom tool implementations
+│   ├── main.py               # Main application entry point
+│   ├── lookup.py             # Application constants and settings
+│   ├── config.json           # Application configuration
+│   ├── prompt.txt            # Default prompt template
+│   ├── core/                 # Core components
+│   │   ├── __init__.py
+│   │   ├── message.py        # Message handling system
+│   │   └── conversation.py   # Conversation history management
+│   ├── tools/                # Tool management system
+│   │   ├── __init__.py
+│   │   ├── tools.py          # Main tools interface
+│   │   └── custom_tools/     # Custom tool implementations
+│   │       ├── __init__.py
+│   │       └── web_action.py # Web search and fetch tools
+│   ├── utils/                # Utility functions
+│   │   ├── __init__.py
+│   │   └── utils.py          # Helper functions
+│   └── models/               # AI model interfaces
 │       ├── __init__.py
-│       └── web_action.py     # Web search and fetch tools
-├── config.json               # Application configuration
-├── lookup.py                 # Application constants and settings
+├── setup.py                  # Setup script for packaging
+├── pyproject.toml            # Modern Python packaging configuration
 ├── requirements.txt          # Python package dependencies
-├── main.py                   # Main application entry point
-└── README.md                 # This file
+├── MANIFEST.in              # Package manifest
+└── README.md                # This file
 ```
 
 ### Component Details
 
-1. **commonlib/kTools.py**: Core utility framework implementing singleton pattern with extensive helper functions for logging, file operations, configuration management, etc.
+1. **myaichatbot/main.py**: Main application entry point with MyAIChatBot class and CLI interface.
 
-2. **lib/message.py**: Manages conversation messages with filtering for duplicates and proper message structuring.
+2. **myaichatbot/core/message.py**: Manages conversation messages with filtering for duplicates and proper message structuring.
 
-3. **lib/tools.py**: Tool registration and execution system that allows the AI to use functions like file operations and web searches.
+3. **myaichatbot/core/conversation.py**: Handles saving and retrieving conversation history for context awareness.
 
-4. **lib/conversation.py**: Handles saving and retrieving conversation history for context awareness.
+4. **myaichatbot/tools/tools.py**: Tool registration and execution system that allows the AI to use functions like file operations and web searches.
 
-5. **lib/utils.py**: Utility functions including recursive file reading and AI completion checking.
+5. **myaichatbot/tools/custom_tools/web_action.py**: Implementation of web search and fetch tools using Ollama.
 
-6. **lib/custom_tools/web_action.py**: Implementation of web search and fetch tools using Ollama.
+6. **myaichatbot/utils/utils.py**: Utility functions including recursive file reading and AI completion checking.
+
+7. **myaichatbot/lookup.py**: Application constants and settings.
+
+8. **commonlib/kTools.py**: Core utility framework implementing singleton pattern with extensive helper functions for logging, file operations, configuration management, etc. (external dependency)
 
 ## Requirements
 
@@ -228,9 +262,14 @@ git clone https://github.com/kayma/myaichatbot.git
 cd myaichatbot
 ```
 
-2. Make your changes
+2. Install in development mode:
+```bash
+pip install -e .
+```
 
-3. Submit a pull request with a detailed description of your changes
+3. Make your changes
+
+4. Submit a pull request with a detailed description of your changes
 
 ## License
 
@@ -239,4 +278,4 @@ MIT – see `LICENSE`
 ## Author
 
 Kumaresan Lakshmanan (kayma) – <kaymatrix@gmail.com>  
-⏰ v0.0.1 · 2026-03-26
+⏰ v0.1.0 · 2026-03-26

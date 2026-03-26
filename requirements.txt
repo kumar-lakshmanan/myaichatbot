@@ -1,2 +1,3 @@
 # MyAIChatBot Requirements
 ollama>=0.1.0
+kpylib>=0.1.0

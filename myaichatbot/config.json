@@ -4,6 +4,8 @@
 					"dateTimeFormat" : "%Y-%m-%d %I:%M:%S %p",
 					"hostname": "MUKUND_PC",
 					
+					"simulate" : 0,
+					
 					"verbose" : 0,
 					
 					"mainModel": "qwen3-coder:480b-cloud",
@@ -13,8 +15,6 @@
 					"ai_definition" : "ai_definition_for_general",
 					"ai_definition_sample1" : "ai_definition_for_general",
 					"ai_definition_sample2" : "ai_definition_for_coding",
-
-					"simulate" : 0,
            										
 					"include_reference_files" : 1,
 					"include_past_conversation" : 0,
@@ -30,7 +30,8 @@
 													".project",
 													".pydevproject",
 													"conversation",
-													".git"
+													".git",
+													"dist"
 											    ],
 												
 					"save_prompt" : 1,
