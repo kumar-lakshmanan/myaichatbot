@@ -105,7 +105,7 @@ export OLLAMA_API_KEY="your-api-key-here"
 
 ```bash
 # Run the application
-myaichatbot
+python -m myaichatbot.main
 ```
 
 ### Programmatic Usage

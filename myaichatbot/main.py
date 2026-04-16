@@ -202,9 +202,7 @@ def main():
     mcb = MyAIChatBot()
     mcb.initialize()
     qry = '''
-        how do i run package build process for my projects (eg: G:\pyworkspace\kpylib and G:\pyworkspace\myaichatbot)?
-        how do i increase version numbers for the packages?
-        how i include kpylib package in my main project myaichatbot?        
+        who are you?       
     '''
     mcb.chat(qry)
     tls.info(f"You: {qry}")
